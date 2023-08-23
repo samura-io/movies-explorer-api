@@ -10,8 +10,9 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const INTERNAL_SERVER_ERROR = 500;
 const { PORT = 3000 } = process.env;
+const { NODE_ENV, DB_IP } = process.env;
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', {
+mongoose.connect(NODE_ENV === 'production' ? DB_IP : 'mongodb://localhost:27017/bitfilmsdb', {
   useNewUrlParser: true,
 });
 

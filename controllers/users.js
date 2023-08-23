@@ -19,6 +19,9 @@ module.exports.updateUserInfo = (req, res, next) => {
   userSchema.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true })
     .then((data) => res.send(data))
     .catch((err) => {
+      if (err.code === 11000) {
+        next(new Conflict('Пользователь с данным Email`ом существует'));
+      }
       if (err instanceof validationError) {
         next(new BadRequest('Переданы некорректные данные при обновлении профиля'));
       } else {

@@ -2,12 +2,13 @@ const router = require('express').Router();
 const NotFound = require('../errors/NotFound');
 const userRouter = require('./users');
 const moviesRouter = require('./movies');
+const auth = require('../middlewares/auth');
 const { createUser, login, signout } = require('../controllers/users');
 const { validationSignup, validationSignin } = require('../middlewares/validation');
 
 router.post('/signup', validationSignup, createUser);
 router.post('/signin', validationSignin, login);
-router.get('/signout', signout);
+router.get('/signout', auth, signout);
 router.use(userRouter);
 router.use(moviesRouter);
 router.use('*', (req, res, next) => {
