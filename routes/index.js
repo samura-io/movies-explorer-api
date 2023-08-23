@@ -11,7 +11,7 @@ router.post('/signin', validationSignin, login);
 router.get('/signout', auth, signout);
 router.use(userRouter);
 router.use(moviesRouter);
-router.use('*', (req, res, next) => {
+router.use('*', auth, (req, res, next) => {
   next(new NotFound('Страница не найдена либо неверный тип запроса'));
 });
 
