@@ -48,8 +48,8 @@ module.exports.validationSignin = celebrate({
 
 module.exports.validationMovieInfo = celebrate({
   body: Joi.object().keys({
-    country: Joi.string().required().min(2).max(15),
-    director: Joi.string().required().min(2).max(30),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.number().required(),
     description: Joi.string().required(),

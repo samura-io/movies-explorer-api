@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cors = require('cors');
 const router = require('./routes/index');
-const limiter = require('./middlewares/rateLimiter');
+// const limiter = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const INTERNAL_SERVER_ERROR = 500;
@@ -17,7 +17,7 @@ mongoose.connect(NODE_ENV === 'production' ? DB_IP : 'mongodb://localhost:27017/
 });
 
 const app = express();
-app.use(limiter);
+// app.use(limiter);
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
