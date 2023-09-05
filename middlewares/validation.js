@@ -26,7 +26,7 @@ const validateId = (Id) => {
 
 module.exports.validationUserInfo = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().custom(validateEmail),
+    email: Joi.string().custom(validateEmail),
     name: Joi.string().min(2).max(30),
   }),
 });
