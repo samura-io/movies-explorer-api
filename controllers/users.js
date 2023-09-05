@@ -95,9 +95,17 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.signout = (req, res, next) => {
-  try {
-    res.clearCookie('jwt').send({ message: 'Выход' });
-  } catch (err) {
-    next(err);
+  const userAgent = req.get('User-Agent');
+  const regEx = /Chrome\/\d+/;
+  if (userAgent.match(regEx) && userAgent.match(regEx).toString().replace('Chrome/', '') > 80) {
+    res.clearCookie('jwt', {
+      sameSite: 'None',
+      secure: true,
+    });
+  } else {
+    res.clearCookie('jwt', {
+      sameSite: 'Strict',
+    });
   }
+  res.send({ message: 'Выход' });
 };
