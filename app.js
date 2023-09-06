@@ -26,11 +26,12 @@ app.disable('x-powered-by');
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    // 'http://example.com',
-    // 'https://example.com'
+    'https://samura.io.nomoredomainsicu.ru',
+    'http://samura.io.nomoredomainsicu.ru'
   ],
   credentials: true,
 };
+
 
 app.use(cors(corsOptions));
 
